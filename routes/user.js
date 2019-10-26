@@ -3,8 +3,10 @@ let express = require('express');
 let mongoose = require('mongoose');
 let router = express.Router();
 
-mongoose.connect('mongodb://localhost:27017/users');
-let db = mongoose.connection;
+/*mongoose.connect('mongodb://localhost:27017/users');
+let db = mongoose.connection;*/
+let db = mongoose.createConnection('mongodb://localhost:27017/users');
+module.exports = db;
 
 db.on('error', function (err) {
     console.log('Unable to Connect to [ ' + db.name + ' ]', err);
@@ -14,10 +16,7 @@ db.once('open', function () {
     console.log('Successfully Connected to [ ' + db.name + ' ]');
 });
 
-let findById = (arr, id) => {
-    let result  = arr.filter(function(o) { return o.id === id;} );
-    return result ? result[0] : null; // or undefined
-};
+
 
 router.addUser = (req,res) => {
     res.setHeader('Content-Type', 'application/json');

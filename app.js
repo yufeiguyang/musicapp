@@ -35,16 +35,18 @@ app.delete('/user/:username',user.deleteUser);
 app.put('/user/:username',user.updateUser);
 
 app.get('/leadboard',leadboard.showAllBoards);
-app.get('/leadboard/:name',leadboard.searchBoard);
+app.get('/leadboard/:name',leadboard.findBoards);
 app.post('/leadboard',leadboard.addBoard);
-app.delete('leadboard/:name',leadboard.deleteBoard);
-app.put('leadboard/:name',leadboard.updateBoard);
+app.delete('/leadboard/:name',leadboard.deleteBoard);
+app.put('/leadboard/:name',leadboard.updateBoard);
 
 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler

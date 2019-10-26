@@ -3,8 +3,11 @@ let mongoose = require('mongoose');
 let express = require('express');
 let router = express.Router();
 
-mongoose.connect('mongodb://localhost:27017/musics');
-let db = mongoose.connection;
+/*mongoose.connect('mongodb://localhost:27017/musics');
+let db = mongoose.connection;*/
+
+let db = mongoose.createConnection('mongodb://localhost:27017/musics');
+module.exports = db;
 
 db.on('error', function (err) {
     console.log('Unable to Connect to [ ' + db.name + ' ]', err);
