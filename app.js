@@ -27,7 +27,7 @@ app.get('/music/:name',music.findOne);
 app.post('/music',music.addMusic);
 app.delete('/music/:name',music.deleteMusic);
 app.put('/music/:name',music.updateMusicInfo);
-app.get('/music/:ablum',music.searchAlbum);
+app.get('/music/:album/album',music.searchAlbum);
 
 app.get('/user/:username',user.searchUser);
 app.post('/user',user.addUser);

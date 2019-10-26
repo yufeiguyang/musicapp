@@ -1,7 +1,18 @@
 let musics = require('../models/musics');
+let mongoose = require('mongoose');
 let express = require('express');
 let router = express.Router();
 
+mongoose.connect('mongodb://localhost:27017/musics');
+let db = mongoose.connection;
+
+db.on('error', function (err) {
+    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
+});
+
+db.once('open', function () {
+    console.log('Successfully Connected to [ ' + db.name + ' ]');
+});
 function getByName(array,name){
     let result = array.filter(function(obj){return obj.name === name;});
     return result ? result[0] : null;
@@ -10,72 +21,89 @@ function getByName(array,name){
 
 router.showAll = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(musics,null,5));
+
+    musics.find(function(err, musics) {
+        if (err)
+            res.send(err);
+
+        res.send(JSON.stringify(musics,null,5));
+    });
 }
 
 router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
-    let music = getByName(musics,req.params.name);
-    if (music != null)
-        res.send(JSON.stringify(musics,null,5));
-    else
-        res.send('Music NOT Found!!');
+    musics.find({ "name" : req.params.name },function(err, musics) {
+        if (err){
+            res.json({ message: 'Music NOT Found!', errmsg : err });
+        }
+        else{
+            res.send(JSON.stringify(musics,null,5));}
 
+    });
 }
 
 router.addMusic = (req, res) => {
-    let currentSize = musics.length;
-    musics.push({"Mid":currentSize+1,"name": req.body.name,"singer": req.body.singer,"album":req.body.album,"introduction":req.body.introduction});
-    if((currentSize +1) === musics.length){
-        res.json({ message: 'music Added Successfully!'});
-        res.send(req.body.name);
-    }
+    res.setHeader('Content-Type', 'application/json');
 
-};
+    let Music= new musics();
+    Music.name = req.body.name;
+    Music.singer = req.body.singer;
+    Music.album = req.body.album;
+    Music.introduction = req.body.introduction;
+
+              Music.save(function(err) {
+                if (err)
+                {
+                    res.json({ message: 'music Added failed'});
+                }
+                else
+                {
+                    res.json({ message: 'music Added Successfully!',data:Music});
+
+                 }
+              });
+}
 
 router.deleteMusic = (req,res) =>{
-    let music = getByName(musics,req.params.name);
-    let index = musics.indexOf(music);
 
-    let currentSize = musics.length;
-    musics.splice(index,1);
+    musics.findByIdAndRemove(req.params.name, function(err) {
+        if (err)
+            res.json({ message: 'Music NOT DELETED!', errmsg : err } );
+        else
+            res.json({ message: 'Music Successfully Deleted!'});
+    });
 
-    if((currentSize - 1) === musics.length)
-        res.json({ message: music.name + ' Deleted!'});
-    else
-        res.json({ message: music.name + ' NOT Deleted!'});
 }
 
 router.updateMusicInfo = (req,res) => {
-    let music = getByName(musics,req.params.name);
-
-    music.singer = req.params.singer;
-    music.album = req.params.album;
-    music.introduction = req.params.introduction;
-
-    res.json({message: 'music information has updated!'})
+    res.setHeader('Content-Type', 'application/json');
+    musics.findById(req.params.name,function(err,Music) {
+        if (err) {
+            res.json({message: 'Music NOT found!', errmsg: err});
+        } else {
+            Music.singer = req.body.singer;
+            Music.album = req.body.album;
+            Music.introduction = req.body.introduction;
+            if (err) {
+                res.json({message: 'Music updated failed'});
+            } else {
+                res.json({message: 'Music Successfully update!',data:Music});
+            }
+        }
+    });
 }
 
 router.searchAlbum = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    let album = req.params.album;
-    let  array = [];
-    let currentSize = musics.length;
-
-    for(let i =0 ;i<currentSize;i+=1){
-        if(musics[i].album === album){
-            array.push(musics[i]);
+    musics.find({"album":req.params.album},function(err,musics) {
+        if(err){
+            res.json({message: 'Music NOT found!', errmsg: err});
+        }else{
+            res.json({message: 'Music Successfully Found!',data:musics});
         }
-    }
+    })
 
-    if(array.length === 0) {
-        res.json({message:'this album is not included!'})
-    }
-    else{
-        res.json({message:'the album has been found!'})
-        res.send(JSON.stringify(array));
-    }
 }
 
 module.exports = router;

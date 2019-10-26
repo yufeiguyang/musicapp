@@ -57,7 +57,7 @@ router.searchUser = (req,res) => {
         res.json({message:'user not found!'})
     }
     else{
-        res.json({message:'user has been found!'})
+
         res.send(JSON.stringify(array));
     }
 }

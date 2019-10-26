@@ -70,8 +70,9 @@ router.searchBoard = (req,res) => {
         res.json({message:'this leaderBoard is not included!'})
     }
     else{
-        res.json({message:'the leaderBoard has been found!'})
         res.send(JSON.stringify(array));
+
+
     }
 }
 
