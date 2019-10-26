@@ -67,7 +67,7 @@ router.addMusic = (req, res) => {
 
 router.deleteMusic = (req,res) =>{
 
-    musics.findByIdAndRemove(req.params.name, function(err) {
+    musics.remove({"name":req.params.name}, function(err) {
         if (err)
             res.json({ message: 'Music NOT DELETED!', errmsg : err } );
         else
@@ -78,7 +78,7 @@ router.deleteMusic = (req,res) =>{
 
 router.updateMusicInfo = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    musics.findById(req.params.name,function(err,Music) {
+    musics.find({"name":req.params.name},function(err,Music) {
         if (err) {
             res.json({message: 'Music NOT found!', errmsg: err});
         } else {

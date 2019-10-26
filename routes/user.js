@@ -1,6 +1,18 @@
 let users = require('../models/users');
 let express = require('express');
+let mongoose = require('mongoose');
 let router = express.Router();
+
+mongoose.connect('mongodb://localhost:27017/users');
+let db = mongoose.connection;
+
+db.on('error', function (err) {
+    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
+});
+
+db.once('open', function () {
+    console.log('Successfully Connected to [ ' + db.name + ' ]');
+});
 
 let findById = (arr, id) => {
     let result  = arr.filter(function(o) { return o.id === id;} );
@@ -8,58 +20,68 @@ let findById = (arr, id) => {
 };
 
 router.addUser = (req,res) => {
-    let currentSize = users.length;
-    users.push({"id":currentSize+20190001,"username": req.body.username,"userpassword": req.body.userpassword,"picture":req.body.picture,"introduction":req.body.introduction});
-    if((currentSize +1) === users.length){
-        res.json({ message: 'user Added Successfully!'});
-        res.send(req.body.username);
-    }
+    res.setHeader('Content-Type', 'application/json');
+
+    let User= new users();
+    User.username = req.body.username;
+    User.userpassword = req.body.userpassword;
+    User.picture = req.body.picture;
+    User.introduction = req.body.introduction;
+
+    User.save(function(err) {
+        if (err)
+        {
+            res.json({ message: 'User Added failed'});
+        }
+        else
+        {
+            res.json({ message: 'User Added Successfully!',data:User});
+
+        }
+    });
 
 };
 
 router.deleteUser = (req,res) => {
-    let user = findById(users,req.params.id);
-    let index = users.indexOf(user);
-
-    let currentSize = users.length;
-    users.splice(index, 1);
-
-    if((currentSize - 1) == users.length)
-        res.json({ message: 'user Deleted!'});
-    else
-        res.json({ message: 'user NOT Deleted!'});
+    users.remove({"username":req.params.username}, function(err) {
+        if (err)
+            res.json({ message: 'user NOT DELETED!', errmsg : err } );
+        else
+            res.json({ message: 'user Successfully Deleted!'});
+    });
 };
 
 router.updateUser = (req,res) => {
-    let user = findById(users,req.params.id);
+    users.update({"username":req.params.name},function(err,User) {
+        if (err) {
+            res.json({message: 'Music NOT found!', errmsg: err});
+        } else {
+            User.username = req.body.username;
+            User.userpassword = req.body.userpassword;
+            User.picture = req.body.picture;
+            User.introduction = req.body.introduction;
+            if (err) {
+                res.json({message: 'User updated failed'});
+            } else {
+                res.json({message: 'User Successfully update!',data:User});
+            }
+        }
+    });
 
-    user.username = req.params.singer;
-    user.userpassword= req.params.album;
-    user.picture = req.params.picture;
-    user.introduction = req.params.introduction;
 
-    res.json({message: 'user information has updated!'})
+
 };
 
 router.searchUser = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    let username = req.params.username;
-    let  array = [];
-    let currentSize = username.length;
-
-    for(let i =0 ;i<currentSize;i+=1){
-        if(users[i].username === username){
-            array.push(users[i]);
+    users.find({"username":req.params.username},function(err,users) {
+        if(err){
+            res.json({message: 'user NOT found!', errmsg: err});
+        }else{
+            res.json({message: 'user Successfully Found!',data:users});
         }
-    }
+    })
 
-    if(array.length === 0) {
-        res.json({message:'user not found!'})
-    }
-    else{
-
-        res.send(JSON.stringify(array));
-    }
 }
 
 

@@ -31,8 +31,8 @@ app.get('/music/:album/album',music.searchAlbum);
 
 app.get('/user/:username',user.searchUser);
 app.post('/user',user.addUser);
-app.delete('/user/:id',user.deleteUser);
-app.put('/user/:id',user.updateUser);
+app.delete('/user/:username',user.deleteUser);
+app.put('/user/:username',user.updateUser);
 
 app.get('/leadboard',leadboard.showAllBoards);
 app.get('/leadboard/:name',leadboard.searchBoard);
