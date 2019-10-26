@@ -1,11 +1,12 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var routes = require('./routes/index');
+var music = require('./routes/music');
+var user = require('./routes/user');
+var leadboard = require('./routes/leadboard');
 
 var app = express();
 
@@ -19,8 +20,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', routes);
+
+app.get('/music',music.showAll);
+app.get('/music/:name',music.findOne);
+app.post('/music',music.addMusic);
+app.delete('/music/:name',music.deleteMusic);
+app.put('/music/:name',music.updateMusicInfo);
+app.get('/music/:ablum',music.searchAlbum);
+
+app.get('/user/:username',user.searchUser);
+app.post('/user',user.addUser);
+app.delete('/user/:id',user.deleteUser);
+app.put('/user/:id',user.updateUser);
+
+app.get('/leadboard',leadboard.showAllBoards);
+app.get('/leadboard/:name',leadboard.searchBoard);
+app.post('/leadboard',leadboard.addBoard);
+app.delete('leadboard/:name',leadboard.deleteBoard);
+app.put('leadboard/:name',leadboard.updateBoard);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

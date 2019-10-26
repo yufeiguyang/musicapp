@@ -16,9 +16,7 @@ router.showAll = (req,res) => {
 router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
-
     let music = getByName(musics,req.params.name);
-
     if (music != null)
         res.send(JSON.stringify(musics,null,5));
     else

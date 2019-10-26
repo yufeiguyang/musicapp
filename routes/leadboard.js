@@ -76,5 +76,5 @@ router.searchBoard = (req,res) => {
 }
 
 
-
+module.exports = router;
 
