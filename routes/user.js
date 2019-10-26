@@ -9,7 +9,7 @@ let findById = (arr, id) => {
 
 router.addUser = (req,res) => {
     let currentSize = users.length;
-    users.push({"id":currentSize+1,"username": req.body.username,"userpassword": req.body.userpassword,"picture":req.body.picture,"introduction":req.body.introduction});
+    users.push({"id":currentSize+20190001,"username": req.body.username,"userpassword": req.body.userpassword,"picture":req.body.picture,"introduction":req.body.introduction});
     if((currentSize +1) === users.length){
         res.json({ message: 'user Added Successfully!'});
         res.send(req.body.username);

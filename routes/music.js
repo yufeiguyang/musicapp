@@ -3,7 +3,7 @@ let express = require('express');
 let router = express.Router();
 
 function getByName(array,name){
-    var result = array.filter(function(obj){return obj.name === name;});
+    let result = array.filter(function(obj){return obj.name === name;});
     return result ? result[0] : null;
 }
 
@@ -17,9 +17,9 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    var donation = getByValue(musics,req.params.name);
+    let music = getByName(musics,req.params.name);
 
-    if (donation != null)
+    if (music != null)
         res.send(JSON.stringify(musics,null,5));
     else
         res.send('Music NOT Found!!');
