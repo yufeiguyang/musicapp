@@ -80,6 +80,7 @@ router.searchAlbum = (req,res) => {
     }
 }
 
+module.exports = router;
 
 
 
