@@ -3,18 +3,18 @@ let mongoose = require('mongoose');
 let express = require('express');
 let router = express.Router();
 
-/*mongoose.connect('mongodb://localhost:27017/leaderboard');
-let db = mongoose.connection;*/
-let options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
-    user: 'yufeiyang', pass: 'yu717235460' };
+// mongoose.connect('mongodb://localhost:27017/leaderboard');
+mongoose.connect('mongodb://yufeiyang:yu717235460@ds239858.mlab.com:39858/heroku_24v850ch')
+let db = mongoose.connection;
+// let options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+//     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
+//     user: 'yufeiyang', pass: 'yu717235460' };
+//
+// let mongodbUri = 'mongodb://ds239858.mlab.com:39858/heroku_24v850ch';
 
-let mongodbUri = 'mongodb://ds239858.mlab.com:39858/heroku_24v850ch';
 
 
-
-let db = mongoose.createConnection(mongodbUri,options);
-module.exports = db;
+// let db = mongoose.createConnection(mongodbUri,options);
 
 db.on('error', function (err) {
     console.log('Unable to Connect to [ ' + db.name + ' ]', err);
