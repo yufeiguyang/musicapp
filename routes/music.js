@@ -5,8 +5,15 @@ let router = express.Router();
 
 /*mongoose.connect('mongodb://localhost:27017/musics');
 let db = mongoose.connection;*/
+let options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
+    user: 'yufeiyang', pass: 'yu717235460' };
 
-let db = mongoose.createConnection('mongodb://localhost:27017/musics');
+let mongodbUri = 'mongodb://ds239858.mlab.com:39858/heroku_24v850ch';
+
+
+
+let db = mongoose.createConnection(mongodbUri,options);
 module.exports = db;
 
 db.on('error', function (err) {
