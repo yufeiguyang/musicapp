@@ -58,19 +58,22 @@ router.deleteUser = (req,res) => {
 };
 
 router.updateUser = (req,res) => {
-    users.update({"username":req.params.name},function(err,User) {
+    users.update({"username":req.params.name},function(err) {
         if (err) {
             res.json({message: 'Music NOT found!', errmsg: err});
         } else {
+            let User = new users();
             User.username = req.body.username;
             User.userpassword = req.body.userpassword;
             User.picture = req.body.picture;
             User.introduction = req.body.introduction;
-            if (err) {
-                res.json({message: 'User updated failed'});
-            } else {
-                res.json({message: 'User Successfully update!',data:User});
-            }
+            User.save(function (err) {
+                if (err) {
+                    res.json({message: 'User updated failed'});
+                } else {
+                    res.json({message: 'User Successfully update!', data: User});
+                }
+            });
         }
     });
 

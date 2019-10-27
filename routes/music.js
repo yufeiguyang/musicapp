@@ -88,18 +88,22 @@ router.deleteMusic = (req,res) =>{
 
 router.updateMusicInfo = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    musics.find({"name":req.params.name},function(err,Music) {
+    musics.find({"name":req.params.name},function(err) {
         if (err) {
             res.json({message: 'Music NOT found!', errmsg: err});
         } else {
+
+            let Music= new musics();
             Music.singer = req.body.singer;
             Music.album = req.body.album;
             Music.introduction = req.body.introduction;
+            Music.save(function (err) {
             if (err) {
                 res.json({message: 'Music updated failed'});
             } else {
                 res.json({message: 'Music Successfully update!',data:Music});
             }
+         });
         }
     });
 }
