@@ -59,7 +59,7 @@ router.deleteUser = (req,res) => {
 
 router.updateUserPassword = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    users.update({"name":req.params.name},{$set:{"userpassword":req.body.password}},function(err, result)
+    users.update({"username":req.params.username},{$set:{"userpassword":req.body.userpassword}},function(err, result)
     {
         if (err) {
             res.json({message: 'password NOT found!', errmsg: err});
