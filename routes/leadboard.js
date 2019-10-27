@@ -83,24 +83,17 @@ router.deleteBoard = (req,res) =>{
 
 router.updateBoard = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    leaderboard.find({"name":req.params.name},function(err) {
+    leaderboard.update({"name":req.params.name},{$set:{"include":req.body.include}},function(err, result)
+    {
         if (err) {
             res.json({message: 'leaderboard NOT found!', errmsg: err});
         } else {
-            let boards = new leaderboard();
-            boards.id = req.body.id;
-            boards.name = req.body.name;
-            boards.include = req.body.include;
-            boards.save(function (err) {
-                if (err) {
-                    res.json({message: 'leaderboard updated failed'});
-                } else {
-                    res.json({message: 'leaderboard Successfully update!', data: boards});
-                }
-            });
+            res.json({message: 'leaderboard Successfully update!'});
         }
 
     });
+
+
 };
 
 

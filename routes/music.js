@@ -88,7 +88,18 @@ router.deleteMusic = (req,res) =>{
 
 router.updateMusicInfo = (req,res) => {
     res.setHeader('Content-Type', 'application/json');
-    musics.find({"name":req.params.name},function(err) {
+   musics.update({"name":req.params.name},{$set:{"introduction":req.body.introduction}},function(err, result)
+    {
+        if (err) {
+            res.json({message: 'Music NOT found!', errmsg: err});
+        } else {
+            res.json({message: 'Music Successfully update!'});
+        }
+
+    });
+
+}
+    /* musics.find({"name":req.params.name},function(err) {
         if (err) {
             res.json({message: 'Music NOT found!', errmsg: err});
         } else {
@@ -97,6 +108,12 @@ router.updateMusicInfo = (req,res) => {
             Music.singer = req.body.singer;
             Music.album = req.body.album;
             Music.introduction = req.body.introduction;
+            musics.remove({"name":req.params.name}, function(err) {
+                if (err){}
+
+                else{}
+
+            });
             Music.save(function (err) {
             if (err) {
                 res.json({message: 'Music updated failed'});
@@ -105,8 +122,8 @@ router.updateMusicInfo = (req,res) => {
             }
          });
         }
-    });
-}
+    });*/
+
 
 router.searchAlbum = (req,res) => {
     res.setHeader('Content-Type', 'application/json');

@@ -26,19 +26,19 @@ app.get('/music',music.showAll);
 app.get('/music/:name',music.findOne);
 app.post('/music',music.addMusic);
 app.delete('/music/:name',music.deleteMusic);
-app.put('/music/:name',music.updateMusicInfo);
+app.put('/music/:name/introduction',music.updateMusicInfo);
 app.get('/music/:album/album',music.searchAlbum);
 
 app.get('/user/:username',user.searchUser);
 app.post('/user',user.addUser);
 app.delete('/user/:username',user.deleteUser);
-app.put('/user/:username',user.updateUser);
+app.put('/user/:username/password',user.updateUserPassword);
 
 app.get('/leadboard',leadboard.showAllBoards);
 app.get('/leadboard/:name',leadboard.findBoards);
 app.post('/leadboard',leadboard.addBoard);
 app.delete('/leadboard/:name',leadboard.deleteBoard);
-app.put('/leadboard/:name',leadboard.updateBoard);
+app.put('/leadboard/:name/include',leadboard.updateBoard);
 
 
 
