@@ -3,16 +3,8 @@ let express = require('express');
 let mongoose = require('mongoose');
 let router = express.Router();
 
-// mongoose.connect('mongodb://localhost:27017/users');
 mongoose.connect('mongodb://yufeiyang:yu717235460@ds239858.mlab.com:39858/heroku_24v850ch')
 let db = mongoose.connection;
-// let options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-//     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } },
-//     user: 'yufeiyang', pass: 'yu717235460' };
-//
-// let mongodbUri = 'mongodb://ds239858.mlab.com:39858/heroku_24v850ch';
-//
-// let db = mongoose.createConnection(mongodbUri,options);
 
 
 db.on('error', function (err) {
@@ -23,6 +15,10 @@ db.once('open', function () {
     console.log('Successfully Connected to [ ' + db.name + ' ]');
 });
 
+function getByName(array,name){
+    let result = array.filter(function(obj){return obj.username === username;});
+    return result ? result[0] : null;
+}
 
 
 router.addUser = (req,res) => {
@@ -68,10 +64,6 @@ router.updateUserPassword = (req,res) => {
         }
 
     });
-
-
-
-
 };
 
 router.searchUser = (req,res) => {
@@ -79,7 +71,8 @@ router.searchUser = (req,res) => {
     users.find({"username":req.params.username},function(err,users) {
         if(err){
             res.json({message: 'user NOT found!', errmsg: err});
-        }else{
+        }
+        else{
             res.json({message: 'user Successfully Found!',data:users});
         }
     })
