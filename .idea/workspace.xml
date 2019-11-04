@@ -2,14 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d12f625a-5932-4eee-9e8b-6c18f46cb3cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/leaderboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/musics.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/musics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/musciappvideo.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/cookie-signature/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/debug/.coveralls.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/debug/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/debug/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/debug/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/iconv-lite/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/qs/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/qs/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/qs/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/qs/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/node_modules/utils-merge/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/leadboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/leadboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/music.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/music.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/test/functional/api/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test/functional/api/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/leaderboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/leaderboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/musics.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/musics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musciappvideo.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/leadboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/leadboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/music.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/music.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/functional/api/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/functional/api/test.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,9 +60,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response1.json" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1SVuNOZ6S07YltHX6mMhudmJ16N" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -1127,6 +1158,9 @@
       <workItem from="1572812591934" duration="836000" />
       <workItem from="1572858363867" duration="663000" />
       <workItem from="1572872604738" duration="828000" />
+      <workItem from="1572887466212" duration="1812000" />
+      <workItem from="1572889525435" duration="988000" />
+      <workItem from="1572890580556" duration="140000" />
     </task>
     <servers />
   </component>

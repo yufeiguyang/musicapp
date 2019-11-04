@@ -5,15 +5,15 @@
 ]
 
 module.exports = leaderboards;*/
-let mongoose = require('mongoose');
+let mongoose = require("mongoose")
 
 
 let leaderboardSchema = new mongoose.Schema({
-        id:Number,
-        name:String,
-        include:Array
+  id:Number,
+  name:String,
+  include:Array
 
-    },
-    { collection: 'leaderboard' });
+},
+{ collection: "leaderboard" })
 
-module.exports = mongoose.model('leaderboard', leaderboardSchema);
+module.exports = mongoose.model("leaderboard", leaderboardSchema)
