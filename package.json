@@ -1,44 +1,99 @@
 {
   "name": "musicapp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=dev PORT=3001 node dist/bin/www",
-    "test": "set NODE_ENV=test && mocha test/functional/api/test.js",
+    "test": "set NODE_ENV=test && mocha  test/functional/api/test.js",
     "compile": "babel ./ --out-dir dist/ --ignore ./node_modules,./test --copy-files",
     "clean": "rimraf ./dist && mkdir dist",
-    "build": "npm-run-all test clean compile start"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:watch": "npm run lint -- --watch",
+    "test:report": "cross-env NODE_ENV=test nyc mocha",
+    "compile:models": "babel ./models --out-dir dist/models",
+    "compile:routes": "babel ./routes --out-dir dist/routes ",
+    "compile:app": "babel app.js --out-dir dist/",
+    "compile:copy": "cp -r ./node_modules/ dist/node_modules && cp -r bin/ dist/bin && cp -r views/ dist/views",
+    "compile:all": "npm-run-all compile:models compile:routes compile:app compile:copy",
+    "start:prod": "cross-env NODE_ENV=dev node dist/bin/www",
+    "start:watch": "cross-env NODE_ENV=dev nodemon --exec babel-node bin/www",
+    "prebuild:dev": "npm-run-all test clean",
+    "build:dev": "npm run compile:all",
+    "postbuild:dev": "cp .env dist/ && npm run start:prod",
+    "build:release": "npm-run-all test clean lint compile:all "
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "cookie-parser": "~1.4.4",
+    "core-js": "2.6.11",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "ejs": "~2.6.1",
+    "element-ui": "^2.13.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "lodash": "^4.17.15",
+    "mocha": "^6.2.2",
     "mongodb": "^3.3.3",
     "mongodb-core": "^3.2.7",
     "mongodb-memory-server": "^6.0.1",
     "mongoose": "^5.7.7",
     "morgan": "~1.9.1",
-    "supertest": "^4.0.2"
+    "querystring": "^0.2.0",
+    "supertest": "^4.0.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.4.5",
     "@babel/node": "^7.6.3",
-    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
+    "@babel/register": "^7.7.4",
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-things": "^0.2.0",
     "cross-env": "^6.0.3",
-    "eslint": "^6.6.0",
-    "eslint-watch": "^6.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.13.0",
     "nodemon": "^1.19.4",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0"
-  }
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "vue/no-use-v-if-with-v-for": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
