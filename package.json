@@ -37,7 +37,7 @@
     "element-ui": "^2.13.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mocha": "^6.2.2",
     "mongodb": "^3.3.3",
     "mongodb-core": "^3.2.7",
